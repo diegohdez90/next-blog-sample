@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import Navigation from '../Navigation'
-import NavbarLogo from '../NavBarLogo/NavbarLogo'
+import NavbarLogo from '../NavbarLogo';
 import MenuToggle from '../MenuToggle'
 import MenuLinks from '../MenuLinks'
 
