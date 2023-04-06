@@ -1,10 +1,24 @@
 import { Fragment } from "react";
 import PostsList from "../../components/Blog/List";
 
-const Posts = () => {
+const Posts = (props) => {
+    const { posts } = props;
     return (<Fragment>
-        <PostsList />
+        <PostsList posts={posts} />
     </Fragment>);
 }
 
+export async function getServerSideProps(ctx){
+
+
+    const res = await fetch('http://localhost:3000/api/entries');
+    const data = await res.json();
+    console.log(data);
+  
+    return {
+      props:{
+        posts: data.entries || []
+      }
+    }
+  }
 export default Posts;
