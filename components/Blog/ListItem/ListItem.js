@@ -1,28 +1,57 @@
-import { Button, ButtonGroup, Card, CardBody, CardFooter, CardHeader, GridItem } from '@chakra-ui/react';
+import { Badge, Button, ButtonGroup, Card, CardBody, CardFooter, GridItem, Heading, Link, Stack, Text } from '@chakra-ui/react';
 import Image from 'next/image';
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect, useState } from 'react';
+import MarkdownIt from 'markdown-it';
 
 const ListItem = (props) => {
+  const md = new MarkdownIt();
+  const { post } = props;
+  const {
+    imageURL,
+    content,
+    date,
+    tags,
+    publisher: [creator]
+  } = post;
+
+  const [title, setTitle] = useState('');
+  const [contentPost, setContentPost] = useState('');
+
+  useEffect(() => {
+
+    const postParsed = md.parse(content)
+    const [ firstTag, postTitle, ...restOfContent ] = postParsed;
+    const [, , firstParagraph] = restOfContent;
+    
+    if (firstTag.type === 'heading_open') {
+      setTitle(postTitle.content);
+      setContentPost(firstParagraph.content)
+    }
+  },)
+
+
   return (
     <Fragment>
         <GridItem
             w='1oo%'
         >
             <Card>
-                <CardHeader>
-                    <Image src='#'/>
-                </CardHeader>
                 <CardBody>
-                    <h3>title</h3>
-                    <p>Author</p>
-                    <p>Date</p>
-                    <div>#Tags</div>
-                    <p>The post content</p>
+                    <Image src={imageURL}width='100' height='100' />
+                    <Stack mt={6} spacing={4}>
+                        <Heading as='h4'>{title}</Heading>
+                        <Text>{creator.nickname}</Text>
+                        <p>{date}</p>
+                        <Stack
+                            direction='row'
+                        >{tags.split(",").map(tag => (<Badge key={tag} colorScheme='red.300'>{tag}</Badge>))}</Stack>
+                        <Text as='p'>{contentPost}</Text>
+                    </Stack>
                 </CardBody>
                 <CardFooter>
                     <ButtonGroup spacing={2}>
-                        <Button>Open Entry</Button>
-                        <Button>See Author</Button>
+                        <Link as={Button} backgroundColor='blue.400' color='white'>Open Entry</Link>
+                        <Link as={Button} backgroundColor='blue.400' color='white'>See Author</Link>
                     </ButtonGroup>
                 </CardFooter>
             </Card>

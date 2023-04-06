@@ -1,7 +1,10 @@
+import { Fragment } from "react";
+import PostsList from "../../components/Blog/List";
+
 const Posts = () => {
-    return (<div>
-        <h1>Posts</h1>
-    </div>)
+    return (<Fragment>
+        <PostsList />
+    </Fragment>);
 }
 
 export default Posts;

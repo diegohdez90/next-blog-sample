@@ -1,6 +1,8 @@
-const PostId = () => {
+import PostDetail from "../../components/Blog/Detail";
+
+const PostId = (props) => {
     return (<div>
-        <h1>Post Content</h1>
+        <PostDetail />
     </div>)
 }
 

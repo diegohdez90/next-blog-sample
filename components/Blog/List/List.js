@@ -1,4 +1,4 @@
-import { Grid } from '@chakra-ui/react'
+import { Box, Container, Grid, Heading, Text } from '@chakra-ui/react'
 import React, { Fragment } from 'react'
 import ListItem from '../ListItem'
 
@@ -8,7 +8,7 @@ const List = ({
 }) => {
   return (
     <Fragment>
-        <h2>{featured && 'Featured' } Posts</h2>
+        <Heading as='h2'><Text align='center'>{featured && 'Featured' } Posts</Text></Heading>
         <Grid templateColumns='repeat(4, 1fr)' gap={6}>
             {posts.map((post, index) => <ListItem key={index} post={post} />)}
         </Grid>
@@ -16,4 +16,4 @@ const List = ({
   )
 }
 
-export default List
+export default List;
