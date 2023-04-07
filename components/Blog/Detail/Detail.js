@@ -2,6 +2,7 @@ import Markdown from 'react-markdown';
 import RemarkGfm from 'remark-gfm';
 import React from 'react';
 import classes from './../../../styles/bulma.module.sass';
+import { Box, Image } from '@chakra-ui/react';
 
 const Detail = (props) => {
   const { post } = props;
@@ -18,6 +19,11 @@ const Detail = (props) => {
 
   return (
     <div className={classes.content}>
+      <Box boxSize='xl'>
+        <Image boxSize='100%' objectFit='fill' src={imageURL} />
+      </Box>
+      <p>Published by: {creator.nickname}</p>
+      <p>Created at: {creator.date}</p>
       <Markdown
         remarkPlugins={[RemarkGfm]}
         components={{
