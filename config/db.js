@@ -3,7 +3,11 @@ import { MongoClient, ServerApiVersion } from 'mongodb';
 
 export async function connect() {
 
-    const mongoClient = new MongoClient('mongodb+srv://taintery:radP8vnJnWfGrSS7@blogcluster.ywribm7.mongodb.net/?retryWrites=true&w=majority', {
+    const DB_USERNAME = process.env.DB_USERNAME;
+    const DB_PASSWORD = process.env.DB_PASSWORD;
+    const MONGODB_CLUSTER = process.env.MONGODB_CLUSTER;
+
+    const mongoClient = new MongoClient(`mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${MONGODB_CLUSTER}/?retryWrites=true&w=majority`, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         serverApi: ServerApiVersion.v1 });

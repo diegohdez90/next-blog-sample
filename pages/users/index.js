@@ -4,7 +4,7 @@ import UsersList from "../../components/Users/List";
 const Users = () => {
     return (<Fragment>
             <h1>Our writers</h1>
-            <UsersList />
+            <UsersList users={[]} />
         </Fragment>)
 }
 
