@@ -1,9 +1,14 @@
 import classes from '../../styles/bulma.module.sass';
-
 import PostDetail from "../../components/Blog/Detail";
+import NotificationContext from '../../store/notification';
+import { useContext } from 'react';
+
 
 const PostId = (props) => {
     const { post } = props;
+
+    const context = useContext(NotificationContext);
+
 
     const onSubmitComment = (fullName, email, comments) => {
       fetch(`/api/entries/${post._id}/comments`, {
@@ -16,7 +21,20 @@ const PostId = (props) => {
         headers: {
           'Content-Type': 'application/json'
         }
-      });
+      })
+        .then(res => res.json())
+        .then(data => {
+          context.show({
+            message: data.message,
+            status: 'success'
+          });
+        })
+        .catch(err => {
+          context.show({
+            message: err.toString() || 'Something went wrong in send your comments',
+            status: 'error'
+          })
+        })
     }
     return (
     <div className={classes.section}>

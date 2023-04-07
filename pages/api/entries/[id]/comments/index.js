@@ -7,8 +7,6 @@ export default async function handler(req, res) {
         const client = await connect();
         const { query, body } = req;
         const {id} = query;
-        console.log(body);
-        console.log(id);
         const {
             fullName,
             email,
