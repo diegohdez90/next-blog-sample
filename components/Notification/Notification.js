@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import NotificationContext from "../../store/notification";
 import { Alert, AlertIcon } from "@chakra-ui/react";
+import ReactDOM from "react-dom";
 
 const Notification = (props) => {
   const context = useContext(NotificationContext);
@@ -11,14 +12,14 @@ const Notification = (props) => {
     status,
     message
   } = notification;
-  return (
+  return ReactDOM.createPortal(
     <Alert status={status} onClick={e => {
         context.hide();
     }}>
         <AlertIcon />
         {message}
-    </Alert>
-  )
+    </Alert>, document.querySelector('#notification')
+    );
 }
 
 export default Notification;

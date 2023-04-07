@@ -23,7 +23,7 @@ const MenuLinks = ({
             justify={['center', 'space-between', 'flex-end', 'flex-end']}
             direction={['column', 'row', 'row', 'row']}
         >
-            {links.map(item => (<MenuItem key={item.label} to={item.to} la>{item.label}</MenuItem>))}
+            {links.map(item => (<MenuItem key={item.label} to={item.to}>{item.label}</MenuItem>))}
         </Stack>
     </Box>
   )
