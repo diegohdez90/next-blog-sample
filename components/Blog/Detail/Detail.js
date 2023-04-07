@@ -3,6 +3,7 @@ import RemarkGfm from 'remark-gfm';
 import React from 'react';
 import classes from './../../../styles/bulma.module.sass';
 import { Box, Image } from '@chakra-ui/react';
+import Tags from '../../Tags';
 
 const Detail = (props) => {
   const { post } = props;
@@ -24,6 +25,7 @@ const Detail = (props) => {
       </Box>
       <p>Published by: {creator.nickname}</p>
       <p>Created at: {creator.date}</p>
+      <Tags tags={tags.split(',').map(tag => tag.trim())} />
       <Markdown
         remarkPlugins={[RemarkGfm]}
         components={{

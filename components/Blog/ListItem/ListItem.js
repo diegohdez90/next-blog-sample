@@ -3,6 +3,7 @@ import Image from 'next/image';
 import React, { Fragment, useEffect, useState } from 'react';
 import MarkdownIt from 'markdown-it';
 import { useRouter } from 'next/router';
+import Tags from '../../Tags';
 
 const ListItem = (props) => {
   const md = new MarkdownIt();
@@ -46,9 +47,7 @@ const ListItem = (props) => {
                         <Heading as='h4'>{title}</Heading>
                         <Text>{creator.nickname}</Text>
                         <p>{date}</p>
-                        <Stack
-                            direction='row'
-                        >{tags.split(",").map(tag => (<Badge key={tag} colorScheme='red.300'>{tag}</Badge>))}</Stack>
+                        <Tags tags={tags.split(',').map(tag => tag.trim())} />
                         <Text as='p'>{contentPost}</Text>
                     </Stack>
                 </CardBody>
