@@ -10,7 +10,7 @@ module.exports = (phase) => {
       images: {
         domains: ['logowik.com', 'git-scm.com']
       },
-        env: {
+      env: {
         'DB_USERNAME': 'taintery',
         'DB_PASSWORD': 'radP8vnJnWfGrSS7',
         'MONGODB_CLUSTER': 'blogcluster.ywribm7.mongodb.net',

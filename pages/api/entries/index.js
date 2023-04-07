@@ -10,11 +10,11 @@ export default async function handler(req, res) {
             fullName: body.fullName,
             email: body.email,
             nickname: body.nickname,
-            title: body.title,
             tags: body.tags,
             content: body.content.trim(),
             imageURL: body.imageURL,
             profileURL: body.profileURL,
+            date: Date.now(),
         });
         res.status(201).json({
             message: 'Feedback sent successful',

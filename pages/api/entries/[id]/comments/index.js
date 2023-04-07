@@ -19,6 +19,7 @@ export default async function handler(req, res) {
             email,
             comments,
             entryId: new ObjectId(id),
+            date: Date.now(),
         });
 
         res.status(200).json({
