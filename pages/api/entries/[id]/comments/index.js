@@ -1,4 +1,4 @@
-import { close, connect, postComment } from "../../../../../condig/db";
+import { close, connect, postComment } from "../../../../../config/db";
 import { ObjectId } from 'mongodb';
 
 

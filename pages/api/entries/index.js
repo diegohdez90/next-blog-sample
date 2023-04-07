@@ -1,4 +1,4 @@
-import { close, connect, create, queryInEntry } from "../../../condig/db";
+import { close, connect, create, queryInEntry } from "../../../config/db";
 
 
 export default async function handler(req, res) {

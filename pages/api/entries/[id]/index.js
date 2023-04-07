@@ -1,4 +1,4 @@
-import { close, connect, queryInEntry } from "../../../../condig/db";
+import { close, connect, queryInEntry } from "../../../../config/db";
 import { ObjectId } from 'mongodb';
 
 export default async function handler(req, res) {
