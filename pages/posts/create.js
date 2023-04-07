@@ -1,6 +1,6 @@
-import { Box, Input, InputGroup, Text, Textarea } from "@chakra-ui/react"
-import { useRef } from "react"
-import { Fragment } from "react"
+import { Box, FormControl, Heading, Input, Stack, Text, Textarea } from "@chakra-ui/react"
+import Head from "next/head";
+import { useRef, Fragment } from "react"
 
 const Create =  () => {
     const fullNameRef = useRef();
@@ -42,34 +42,38 @@ const Create =  () => {
     }
 
     return (<Fragment>
-        <Box w= '100%'>
-            <form onSubmit={onSubmitEntry}>
-                <InputGroup>
-                    <Input placeholder="Full Name" ref={fullNameRef} />
-                </InputGroup>
-                <InputGroup>
-                    <Input placeholder="Email" ref={emailRef}/>
-                </InputGroup>
-                <InputGroup>
-                    <Input placeholder="Nickname" ref={nicknameRef} />
-                </InputGroup>
-                <InputGroup>
-                    <Input placeholder="image URL" ref={imageURLRef} />
-                </InputGroup>
-                <InputGroup>
-                    <Input placeholder="Profile Image" ref={profileURLRef} />
-                </InputGroup>
-                <InputGroup>
-                    <Input placeholder="Tags (separate by commas)" ref={tagsRef} />
-                </InputGroup>
-                <InputGroup>
-                    <Textarea placeholder="Enter your entry here" rows={4} ref={contentRef} />
-                </InputGroup>
-                <InputGroup>
-                    <Input type="submit" value='Submit entry' />
-                </InputGroup>
-            </form>
-        </Box>
+        <Head>
+            <title>Create your post</title>
+        </Head>
+        <Heading margin='1em' as='h2'><Text align='center'>Create your post</Text></Heading>
+        <form onSubmit={onSubmitEntry}>
+            <Stack spacing={6}>
+                <FormControl>
+                        <Input placeholder="Full Name" ref={fullNameRef} />
+                </FormControl>
+                <FormControl>
+                        <Input placeholder="Email" ref={emailRef}/>
+                </FormControl>
+                <FormControl>
+                        <Input placeholder="Nickname" ref={nicknameRef} />
+                </FormControl>
+                <FormControl>
+                        <Input placeholder="image URL" ref={imageURLRef} />
+                </FormControl>
+                <FormControl>
+                        <Input placeholder="Profile Image" ref={profileURLRef} />
+                </FormControl>
+                <FormControl>
+                        <Input placeholder="Tags (separate by commas)" ref={tagsRef} />
+                </FormControl>
+                <FormControl>
+                        <Textarea placeholder="Enter your entry here" rows={4} ref={contentRef} />
+                </FormControl>
+                <FormControl>
+                        <Input backgroundColor='blue.300' color='whiteAlpha.900' type="submit" value='Submit entry' />
+                </FormControl>
+            </Stack>
+        </form>
     </Fragment>)
 }
 
