@@ -9,8 +9,8 @@ const List = ({
   return (
     <Fragment>
         <Heading as='h2'><Text align='center'>{featured && 'Featured' } Posts</Text></Heading>
-        <Grid templateColumns='repeat(4, 1fr)' gap={6}>
-            {posts.map((post, index) => <ListItem key={index} post={post} />)}
+        <Grid templateColumns='repeat(3, 1fr)' gap={6}>
+            {posts.map((post, index) => <ListItem key={post._id} post={post} />)}
         </Grid>
     </Fragment>
   )

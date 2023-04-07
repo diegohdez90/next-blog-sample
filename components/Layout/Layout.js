@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import Navbar from '../Navbar/Navbar'
+import { Container } from '@chakra-ui/react'
 
 const Layout = ({
     children
@@ -7,7 +8,7 @@ const Layout = ({
   return (
     <Fragment>
         <Navbar />
-        <main>{children}</main>
+        <Container maxW='container.xl'>{children}</Container>
     </Fragment>
   )
 }
