@@ -24,7 +24,6 @@ export async function create(client, dbName, collection, data) {
     });
 
     let userId = null;
-    console.log('user', user);
 
     if (!user) {
         const userCreated = await db.collection('users').insertOne({
@@ -50,11 +49,8 @@ export async function create(client, dbName, collection, data) {
     return entryId;
 }
 
-export async function getEntries(client, dbName, collection, query) {
+export async function queryInEntry(client, dbName, collection, query) {
     const db = client.db(dbName);
-    /*return await db.collection(collection)
-        .find(query)
-        .toArray();*/
     return await db.collection(collection).aggregate([{
         "$match": query,
     }, {

@@ -9,11 +9,8 @@ const Posts = (props) => {
 }
 
 export async function getServerSideProps(ctx){
-
-
     const res = await fetch('http://localhost:3000/api/entries');
     const data = await res.json();
-    console.log(data);
   
     return {
       props:{

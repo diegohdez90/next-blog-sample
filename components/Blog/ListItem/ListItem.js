@@ -2,11 +2,13 @@ import { Badge, Button, ButtonGroup, Card, CardBody, CardFooter, GridItem, Headi
 import Image from 'next/image';
 import React, { Fragment, useEffect, useState } from 'react';
 import MarkdownIt from 'markdown-it';
+import { useRouter } from 'next/router';
 
 const ListItem = (props) => {
   const md = new MarkdownIt();
   const { post } = props;
   const {
+    _id,
     imageURL,
     content,
     date,
@@ -30,6 +32,8 @@ const ListItem = (props) => {
   },)
 
 
+  const { push } = useRouter()
+
   return (
     <Fragment>
         <GridItem
@@ -50,7 +54,13 @@ const ListItem = (props) => {
                 </CardBody>
                 <CardFooter>
                     <ButtonGroup spacing={2}>
-                        <Link as={Button} backgroundColor='blue.400' color='white'>Open Entry</Link>
+                        <Button
+                            backgroundColor='blue.400'
+                            color='white'
+                            onClick={() => {
+                                push(`/posts/${_id}`);
+                            }}
+                        >Open Entry</Button>
                         <Link as={Button} backgroundColor='blue.400' color='white'>See Author</Link>
                     </ButtonGroup>
                 </CardFooter>

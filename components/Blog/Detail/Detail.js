@@ -1,18 +1,33 @@
 import Markdown from 'react-markdown';
 import RemarkGfm from 'remark-gfm';
-import React, { Fragment } from 'react';
+import React from 'react';
+import classes from './../../../styles/bulma.module.sass';
 
-const Detail = () => {
+const Detail = (props) => {
+  const { post } = props;
+  const {
+    _id,
+    imageURL,
+    content,
+    date,
+    tags,
+    publisher: [creator]
+  } = post;
+
+  console.log(content)
+
   return (
-    <Fragment>
-        <h1>Post Content</h1>
-        <h1>Title</h1>
-        <div>labels</div>
-        <div>Date published</div>
-        <Markdown remarkPlugins={[RemarkGfm]}>
-            This is the content of markdown
-        </Markdown>
-    </Fragment>
+    <div className={classes.content}>
+      <Markdown
+        remarkPlugins={[RemarkGfm]}
+        components={{
+          h1: (props) => <h1 className={classes.title}  {...props} />,
+          table: (props) => <table className={`${classes.table} ${classes['is-striped']}}`} {...props} />,
+        }}
+      >
+          {content}
+      </Markdown>
+    </div>
   )
 }
 

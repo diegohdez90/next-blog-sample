@@ -1,4 +1,4 @@
-import { close, connect, create, getEntries } from "../../../condig/db";
+import { close, connect, create, queryInEntry } from "../../../condig/db";
 
 
 export default async function handler(req, res) {
@@ -28,18 +28,17 @@ export default async function handler(req, res) {
         const { featured } = query;
 
         let dbQuery = {};
-        console.log('featured', featured);
         if (featured) {
             dbQuery = {
                 ...dbQuery,
                 featured: Boolean(featured)
             };
         }
-        const entries = await getEntries(client, 'blog', 'entries', dbQuery);
-        console.log(entries);
+        const entries = await queryInEntry(client, 'blog', 'entries', dbQuery);
         res.status(200).json({
             message: 'Entries retrieved',
             entries: entries
-        })
+        });
+        close();
     }
 }
