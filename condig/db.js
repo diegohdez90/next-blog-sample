@@ -64,6 +64,13 @@ export async function queryInEntry(client, dbName, collection, query) {
         .toArray();
 }
 
+export async function postComment(client, dbName, collection, data) {
+    const db = client.db(dbName);
+    const result = await db.collection(collection).insertOne(data)
+    return result.insertedId;
+}
+
+
 export async function close(client) {
     client.close();
 }

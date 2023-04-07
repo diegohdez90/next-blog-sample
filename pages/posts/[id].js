@@ -5,10 +5,23 @@ import PostDetail from "../../components/Blog/Detail";
 const PostId = (props) => {
     const { post } = props;
 
+    const onSubmitComment = (fullName, email, comments) => {
+      fetch(`/api/entries/${post._id}/comments`, {
+        method: 'POST',
+        body: JSON.stringify({
+          fullName,
+          email,
+          comments
+        }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+    }
     return (
     <div className={classes.section}>
       <div className={classes.container}>
-        <PostDetail post={post} />
+        <PostDetail post={post} onSubmit={onSubmitComment} />
       </div>
     </div>);
 }
