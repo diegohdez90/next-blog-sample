@@ -14,7 +14,8 @@ module.exports = (phase) => {
         'DB_USERNAME': 'taintery',
         'DB_PASSWORD': 'radP8vnJnWfGrSS7',
         'MONGODB_CLUSTER': 'blogcluster.ywribm7.mongodb.net',
-        'DB_NAME': 'blog'
+        'DB_NAME': 'blog',
+        'REST_API_DOMAIN': 'next-blog-sample-lime.vercel.app'
       }
     }
   }
@@ -28,7 +29,8 @@ module.exports = (phase) => {
       'DB_USERNAME': 'taintery',
       'DB_PASSWORD': 'radP8vnJnWfGrSS7',
       'MONGODB_CLUSTER': 'blogcluster.ywribm7.mongodb.net',
-      'DB_NAME': 'dh-blog'
+      'DB_NAME': 'dh-blog',
+      'REST_API_DOMAIN':'http://localhost:3000'
     }
   }
 }

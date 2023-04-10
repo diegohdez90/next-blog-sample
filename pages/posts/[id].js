@@ -65,7 +65,7 @@ export async function getServerSideProps(ctx){
 
     const { params } = ctx;
     const { id } = params;
-    const res = await fetch(`http://localhost:3000/api/entries/${id}`);
+    const res = await fetch(`${process.env.REST_API_DOMAIN}/api/entries/${id}`);
     const data = await res.json();
   
     return {
