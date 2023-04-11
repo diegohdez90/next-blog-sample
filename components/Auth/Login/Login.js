@@ -9,7 +9,7 @@ const Login = (props) => {
   const onLogin = e => {
     e.preventDefault();
     const { value: username } = usernameRef.current;
-    const { value: password } = passwordRef.current
+    const { value: password } = passwordRef.current;
     props.login(username, password);
   }
 

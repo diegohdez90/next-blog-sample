@@ -1,4 +1,5 @@
 import { MongoClient, ServerApiVersion } from 'mongodb';
+import { hash, compare } from '../utils/hash';
 
 
 export async function connect() {
@@ -72,6 +73,36 @@ export async function postComment(client, dbName, collection, data) {
     const db = client.db(dbName);
     const result = await db.collection(collection).insertOne(data)
     return result.insertedId;
+}
+
+export async function signIn(client, dbName, collection, data) {
+    const db = client.db(dbName);
+    const hashedPassword = hash(data.password);
+
+    const result = await db.collection(collection).insertOne({
+        username: data.username,
+        email: data.email,
+        fullName: data.fullName,
+        hash: hashedPassword
+    });
+    return result.insertedId;
+}
+
+export async function login(client, dbName, collection, data) {
+    const db = client.db(dbName);
+    const user = await db.collection(collection).fundOne({
+        username: data.username
+    });
+
+    const response = {};
+
+    if(!user) {
+        return {
+            message: 'User not found'
+        }
+    }
+
+    return compare(data.password, user.hash);
 }
 
 
