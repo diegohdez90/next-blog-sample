@@ -19,6 +19,7 @@ export default async function handler(req, res) {
                 message: 'Password does not match'
             });
             close(client);
+            return;
         }
 
         const count = await getIfAccountIsAvailable(client, DB_NAME, {
@@ -32,6 +33,7 @@ export default async function handler(req, res) {
                 count: count
             });
             close(client);
+            return;
         }
 
         const id = await signIn(client, DB_NAME, 'users', {
