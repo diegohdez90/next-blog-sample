@@ -105,6 +105,16 @@ export async function login(client, dbName, collection, data) {
     return compare(data.password, user.hash);
 }
 
+export async function getIfAccountIsAvailable(client, dbName, query) {
+    const db = client.db(dbName);
+    return await db.collection('users').count({
+        '$or': [{
+            email: query.email
+        }, {
+            username: query.username
+        }]
+    });
+}
 
 export async function close(client) {
     client.close();

@@ -1,4 +1,4 @@
-import { connect, signIn } from "../../../config/db";
+import { connect, getIfAccountIsAvailable, signIn, close } from "../../../config/db";
 
 export default async function handler(req, res) {
 
@@ -13,16 +13,27 @@ export default async function handler(req, res) {
             password,
             confirmPassword
         } = body;
-        console.log(body);
-        console.log(password, confirmPassword);
-        console.log(password !== confirmPassword);
 
         if (password !== confirmPassword) {
             res.status(403).json({
                 message: 'Password does not match'
             });
+            close(client);
         }
-        console.log('ready to add');
+
+        const count = await getIfAccountIsAvailable(client, DB_NAME, {
+            email,
+            username,
+        });
+
+        if (count > 0) {
+            res.status(401).json({
+                message: 'Username or email is being used in the system',
+                count: count
+            });
+            close(client);
+        }
+
         const id = await signIn(client, DB_NAME, 'users', {
             username,
             email,
