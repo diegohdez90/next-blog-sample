@@ -28,7 +28,6 @@ const Profile = (props) => {
         </Fragment>
     }
 
-    console.log(props.data);
     return (<Fragment>
         <Heading title='h3'>
             <Text>Profile</Text>
