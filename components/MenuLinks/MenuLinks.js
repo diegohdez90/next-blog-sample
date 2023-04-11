@@ -7,9 +7,8 @@ const MenuLinks = ({
     isOpen,
     links
 }) => {
-  const { data, status } = useSession();
+  const { status } = useSession();
 
-  console.log('status');
   return (
     <Box
         display={{

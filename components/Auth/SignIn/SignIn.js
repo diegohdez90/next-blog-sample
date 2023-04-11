@@ -10,7 +10,6 @@ const SignIn = (props) => {
   
   const onSignIn = e => {
     e.preventDefault();
-    console.log('on sign in');
     const { value: username } = usernameRef.current;
     const { value: email } = emailRef.current;
     const { value: fullName } = fullNameRef.current;

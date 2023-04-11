@@ -18,7 +18,6 @@ export async function getServerSideProps(ctx){
 
   const res = await fetch(`${process.env.REST_API_DOMAIN}/api/entries?featured=true`);
   const data = await res.json();
-  console.log(data);
 
   return {
     props:{
