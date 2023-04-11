@@ -14,7 +14,6 @@ const Login = () => {
             password: password,
             callbackUrl: '/posts/create'
         });
-        console.log(url, ok);
         if(error) {
             setError(error)
         }

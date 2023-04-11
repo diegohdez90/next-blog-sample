@@ -15,12 +15,26 @@ const Navbar = (props) => {
         <MenuLinks
             isOpen={isOpen}
             links={[{
-                    label: 'Home', to: '/'
+                    label: 'Home', to: '/', session: true
                 }, {
-                    label: 'Posts', to: '/posts'
+                    label: 'Posts', to: '/posts', session: false,
                 }, {
-                    label: 'Writers', to: '/users'
-
+                    label: 'Writers', to: '/users', session: false
+                }, {
+                    label: 'Settings',
+                    children: [{
+                        label: 'Login',
+                        to: '/login',
+                        session: false,
+                    }, {
+                        label: 'Profile',
+                        to: '/profile',
+                        session: true,
+                    }, {
+                        label: 'Logout',
+                        to: '#',
+                        session: true,
+                    }]
                 }
             ]} 
         />
