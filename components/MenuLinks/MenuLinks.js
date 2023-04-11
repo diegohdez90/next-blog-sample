@@ -9,7 +9,7 @@ const MenuLinks = ({
 }) => {
   const { data, status } = useSession();
 
-  console.log(data, status);
+  console.log('status');
   return (
     <Box
         display={{
@@ -29,7 +29,10 @@ const MenuLinks = ({
         >
             {links.map(item => {
                 if (!('children' in item))
-                    return item.session && (<MenuItem
+                    return item.session && status === 'authenticated' ? (<MenuItem
+                        key={item.label}
+                        to={item.to}
+                    >{item.label}</MenuItem>) : (!item.session && <MenuItem
                         key={item.label}
                         to={item.to}
                     >{item.label}</MenuItem>);
@@ -39,7 +42,9 @@ const MenuLinks = ({
                     <MenuList backgroundColor='gray.600'>
                         <Stack spacing={3} paddingStart={4}>
                             {item.children.map(child => {
-                            return status === 'authenticated' && child.session ? <MenuItem key={child.label} to={child.to}>{child.label}</MenuItem> : null;
+                                return status === 'authenticated' && child.session ? (
+                                    ('to' in child ? <MenuItem key={child.label} to={child.to}>{child.label}</MenuItem> : (<MenuItem key={child.label} onClick={child.onClick}>{child.label}</MenuItem>))
+                                ) : child.to && status !== 'authenticated'  && !child.session && <MenuItem key={child.label} to={child.to}>{child.label}</MenuItem>
                             })}
                         </Stack>
                     </MenuList>

@@ -4,6 +4,7 @@ import Navigation from '../Navigation'
 import NavbarLogo from '../NavbarLogo';
 import MenuToggle from '../MenuToggle'
 import MenuLinks from '../MenuLinks'
+import { signOut } from 'next-auth/react'
 
 const Navbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -32,8 +33,12 @@ const Navbar = (props) => {
                         session: true,
                     }, {
                         label: 'Logout',
-                        to: '#',
                         session: true,
+                        onClick: function () {
+                            signOut({
+                                redirect: false
+                            });
+                        }
                     }]
                 }
             ]} 
