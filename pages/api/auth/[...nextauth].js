@@ -3,7 +3,7 @@ import Credentials from 'next-auth/providers/credentials'
 import { close, connect } from '../../../config/db';
 import { compare } from '../../../utils/hash';
 
-export default NextAuth({
+export const authOptions = {
     session: {
         jwt: true
     },
@@ -21,42 +21,44 @@ export default NextAuth({
                     }]
                 });
 
-                if(!account) {
+                if (!account) {
                     close(client);
-                    throw new Error('User not found!')
+                    throw new Error('User not found!');
                 }
 
                 const matched = compare(credentials.password, account.hash);
 
                 if (!matched) {
                     close(client);
-                    throw new Error('Password does not match!')
+                    throw new Error('Password does not match!');
                 }
                 close(client);
                 return {
                     email: {
                         username: account.username,
-                        email: account.username,
+                        email: account.email,
                         fullName: account.fullName
                     }
-                }
+                };
             }
         })
     ],
     callbacks: {
-        jwt: async({
-            token,
-            user
+        jwt: async ({
+            token, user
         }) => {
-            if(user) token.id = user.id
+            if (user)
+                token.id = user.id;
             return token;
         },
-        session: async({
-            session,
-            token
+        session: async ({
+            session, token
         }) => {
-            if (token) session.id = token.id
+            if (token)
+                session.id = token.id;
             return session;
         }
-    }
-});
+    },
+    secret: 'O7u2ETyXNh+gXDSnIGUZfv1G6EGAwwiil962Di1TYoc=',
+};
+export default NextAuth(authOptions);

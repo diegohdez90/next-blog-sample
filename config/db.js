@@ -90,7 +90,7 @@ export async function signIn(client, dbName, collection, data) {
 
 export async function login(client, dbName, collection, data) {
     const db = client.db(dbName);
-    const user = await db.collection(collection).fundOne({
+    const user = await db.collection(collection).findOne({
         username: data.username
     });
 
@@ -114,6 +114,46 @@ export async function getIfAccountIsAvailable(client, dbName, query) {
             username: query.username
         }]
     });
+}
+
+export async function updatePassword(client, dbName, oldPassword, query, newPassword) {
+    const db = client.db(dbName);
+    console.log('query', query);
+    const user = await db.collection('users').findOne(query);
+
+    console.log('user', user);
+    if(!user) {
+        return {
+            message: 'No user found!',
+            code: 404
+        };
+    }
+
+    const matched = compare(oldPassword, user.hash);
+
+    console.log('matched', matched);
+    if (!matched) {
+        return {
+            message: 'Password does not match',
+            code: 401
+        }
+    }
+
+    const hashedPassword = hash(newPassword);
+
+    const result = await db.collection('users').updateOne({
+        fullName: user.fullName,
+        username: user.username,
+        email: user.email
+    }, {
+        $set: {
+            hash: hashedPassword
+        }
+    }, {
+        upsert: true
+    });
+
+    return result;
 }
 
 export async function close(client) {
